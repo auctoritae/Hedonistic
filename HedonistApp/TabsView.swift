@@ -10,7 +10,12 @@ import SwiftUI
 struct TabsView: View {
     var body: some View {
         TabView {
-            Tab(content: { FeedView() }) {
+            Tab(content: {
+                FeedView(store: FeedStore(
+                    state: FeedState(landmarks: [], filter: []),
+                    reducer: FeedReducer(api: APIManager()))
+                )
+             }) {
                 Image(systemName: "eye.fill")
                 Text(SceneTitles.feed)
             }

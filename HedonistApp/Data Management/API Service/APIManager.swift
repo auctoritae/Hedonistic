@@ -8,11 +8,11 @@
 import Foundation
 
 protocol APIManagerProtocol {
-    func fetchData() async throws -> [Landmark]
+    func fetchData() async throws -> [APIModel]
 }
 
 final class APIManager: APIManagerProtocol {
-    func fetchData() async throws -> [Landmark] {
+    func fetchData() async throws -> [APIModel] {
         guard let url = URL(string: APICredentials.url) else { return [] }
         
         var request = URLRequest(url: url)
@@ -20,7 +20,7 @@ final class APIManager: APIManagerProtocol {
         request.addValue(APICredentials.apiKey, forHTTPHeaderField: APICredentials.masterHeader)
         
         let (data, _) = try await URLSession.shared.data(for: request)
-        let landmarks = try JSONDecoder().decode(APIModel.self, from: data)
+        let landmarks = try JSONDecoder().decode(APIRecord.self, from: data)
         
         return landmarks.record
     }

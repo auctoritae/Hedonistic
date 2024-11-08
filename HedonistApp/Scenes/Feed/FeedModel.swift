@@ -1,17 +1,14 @@
 //
-//  Models.swift
+//  FeedModel.swift
 //  HedonistApp
 //
-//  Created by Private on 11/7/24.
+//  Created by Private on 11/8/24.
 //
 
 import Foundation
 
-struct APIRecord: Codable {
-    let record: [APIModel]
-}
-
-struct APIModel: Codable {
+struct Landmark: Identifiable, Hashable {
+    let id: UUID = UUID()
     let category: String?
     let name: String?
     let address: String?
@@ -21,4 +18,10 @@ struct APIModel: Codable {
     let phone: String?
     let workhours: String?
     let image: String?
+}
+
+struct FeedCellModel {
+    let title: String
+    let subtitle: String
+    let image: String
 }

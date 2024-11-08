@@ -17,11 +17,19 @@ struct FeedCellView: View {
         static let endPoint: CGFloat = 1.0
     }
     
+    let model: FeedCellModel
+    
     var body: some View {
         ZStack(alignment: .bottom) {
-            Image("Placeholder")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
+            AsyncImage(url: URL(string: model.image)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } placeholder: {
+                Image("Placeholder")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            }
             
             LinearGradient(
                 gradient: Gradient(colors: [.clear, .black]),
@@ -30,8 +38,8 @@ struct FeedCellView: View {
             )
             
             LazyVStack(alignment: .leading, spacing: Appearance.spacing) {
-                CellTitle(text: "Place title")
-                CellSubtitle(text: "Place subtitle")
+                CellTitle(text: model.title)
+                CellSubtitle(text: model.subtitle)
             }
             .foregroundStyle(.white)
             .padding(.all, Appearance.padding)
@@ -43,5 +51,9 @@ struct FeedCellView: View {
 }
 
 #Preview {
-    FeedCellView()
+    FeedCellView(model: FeedCellModel(
+        title: "Place title",
+        subtitle: "Place subtitle",
+        image: "Placeholder")
+    )
 }
