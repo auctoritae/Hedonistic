@@ -18,9 +18,10 @@ final class APIManager: APIManagerProtocol {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue(APICredentials.apiKey, forHTTPHeaderField: APICredentials.masterHeader)
-        let (data, _) = try await URLSession.shared.data(for: request)
         
+        let (data, _) = try await URLSession.shared.data(for: request)
         let landmarks = try JSONDecoder().decode(APIModel.self, from: data)
+        
         return landmarks.record
     }
 }

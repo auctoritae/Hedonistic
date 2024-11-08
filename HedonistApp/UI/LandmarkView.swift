@@ -35,7 +35,6 @@ struct LandmarkView: View {
                     
                 } label: {
                     Image(systemName: "xmark")
-                        .fontWeight(.black)
                 }
                 
                 Spacer()
@@ -44,14 +43,12 @@ struct LandmarkView: View {
                     
                 } label: {
                     Image(systemName: "bookmark")
-                        .fontWeight(.black)
                 }
                 
                 Button {
                     
                 } label: {
-                    Image(systemName: "phone")
-                        .fontWeight(.black)
+                    Image(systemName: "phone.arrow.up.right.fill")
                 }
             }
             .padding(.all, Appearance.padding)
@@ -68,7 +65,6 @@ struct LandmarkView: View {
             .padding(.all, Appearance.padding)
         }
         .foregroundStyle(.white)
-        .background(.black)
     }
 }
 

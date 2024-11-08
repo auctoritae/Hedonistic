@@ -11,6 +11,7 @@ enum SceneTitles {
     static let feed = "Feed"
     static let bookmarks = "Bookmarks"
     static let map = "Map"
+    static let settings = "Settings"
 }
 
 enum SearchTitles: String, CaseIterable {

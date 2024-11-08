@@ -11,7 +11,7 @@ import SwiftUI
 struct HedonistApp: App {
     var body: some Scene {
         WindowGroup {
-            FeedCellView()
+            TabsView()
         }
     }
 }
