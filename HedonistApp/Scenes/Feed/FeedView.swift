@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FeedView: View {
     @Namespace var namespace
-    var store: FeedStore
+    @State var store: FeedStore
     
     var body: some View {
         ScrollView {
@@ -24,13 +24,12 @@ struct FeedView: View {
                 }
             }
         }
-        .padding(.all, 20)
         .scrollIndicators(.hidden)
         .onAppear {
-            store.send(action: .start)
+            store.fetchData()
         }
 //        .navigationDestination(for: Landmark.self) { model in
-//            FeedItemView(model: model)
+//            LandmarkView(model: model)
 //                .navigationTransition(.zoom(sourceID: model.id, in: namespace))
 //        }
     }
@@ -39,6 +38,7 @@ struct FeedView: View {
 #Preview {
     FeedView(store: FeedStore(
         state: FeedState(landmarks: [], filter: []),
-        reducer: FeedReducer(api: APIManager()))
+        reducer: FeedReducer(),
+        api: APIManager())
     )
 }

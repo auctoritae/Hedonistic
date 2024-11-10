@@ -8,7 +8,7 @@
 import Foundation
 
 enum FeedAction {
-    case start
+    case start(_ landmarks: [Landmark])
     case filter(_ category: String)
     case clear
 }

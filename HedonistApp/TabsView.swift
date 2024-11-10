@@ -13,7 +13,8 @@ struct TabsView: View {
             Tab(content: {
                 FeedView(store: FeedStore(
                     state: FeedState(landmarks: [], filter: []),
-                    reducer: FeedReducer(api: APIManager()))
+                    reducer: FeedReducer(),
+                    api: APIManager())
                 )
              }) {
                 Image(systemName: "eye.fill")

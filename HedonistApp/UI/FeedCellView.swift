@@ -20,33 +20,36 @@ struct FeedCellView: View {
     let model: FeedCellModel
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            AsyncImage(url: URL(string: model.image)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            } placeholder: {
-                Image("Placeholder")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+        VStack {
+            ZStack(alignment: .bottom) {
+                AsyncImage(url: URL(string: model.image)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    Image("Placeholder")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                }
+                
+                LinearGradient(
+                    gradient: Gradient(colors: [.clear, .black]),
+                    startPoint: .init(x: .zero, y: Appearance.startPoint),
+                    endPoint: .init(x: .zero, y: Appearance.endPoint)
+                )
+                
+                LazyVStack(alignment: .leading, spacing: Appearance.spacing) {
+                    CellTitle(text: model.title)
+                    CellSubtitle(text: model.subtitle)
+                }
+                .foregroundStyle(.white)
+                .padding(.all, Appearance.padding)
             }
-            
-            LinearGradient(
-                gradient: Gradient(colors: [.clear, .black]),
-                startPoint: .init(x: .zero, y: Appearance.startPoint),
-                endPoint: .init(x: .zero, y: Appearance.endPoint)
-            )
-            
-            LazyVStack(alignment: .leading, spacing: Appearance.spacing) {
-                CellTitle(text: model.title)
-                CellSubtitle(text: model.subtitle)
-            }
-            .foregroundStyle(.white)
-            .padding(.all, Appearance.padding)
+            .frame(height: Appearance.height)
+            .cornerRadius(Appearance.radius)
+            .shadow(radius: Appearance.radius)
         }
-        .frame(height: Appearance.height)
-        .cornerRadius(Appearance.radius)
-        .shadow(radius: Appearance.radius)
+        .padding(.horizontal, Appearance.padding)
     }
 }
 
