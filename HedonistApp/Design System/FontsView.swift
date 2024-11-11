@@ -58,6 +58,7 @@ struct CellSubtitle: View {
         Text(text)
             .font(.subheadline)
             .foregroundStyle(.gray)
+            .italic()
     }
 }
 

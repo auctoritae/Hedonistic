@@ -9,26 +9,35 @@ import SwiftUI
 
 struct LandmarkView: View {
     private enum Appearance {
-        static let endPoint: CGFloat = 0.8
+        static let startPoint: CGFloat = 0.2
+        static let endPoint: CGFloat = 1.0
         static let padding: CGFloat = 20
-        static let height: CGFloat = 400
+        static let height: CGFloat = 450
     }
+    
+    let model: Landmark
     
     var body: some View {
         ZStack(alignment: .top) {
-            Image("Placeholder")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .containerRelativeFrame(.horizontal)
-                .frame(height: Appearance.height)
-                .edgesIgnoringSafeArea(.top)
-                .overlay {
-                    LinearGradient(
-                        gradient: Gradient(colors: [.clear, .black]),
-                        startPoint: .init(x: .zero, y: .zero),
-                        endPoint: .init(x: .zero, y: Appearance.endPoint)
-                    )
-                }
+            AsyncImage(url: URL(string: model.image ?? "")) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } placeholder: {
+                Image("Placeholder")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            }
+            .frame(height: Appearance.height)
+            .containerRelativeFrame(.horizontal)
+            .edgesIgnoringSafeArea(.top)
+            .overlay {
+                LinearGradient(
+                    gradient: Gradient(colors: [.clear, .black]),
+                    startPoint: .init(x: .zero, y: Appearance.startPoint),
+                    endPoint: .init(x: .zero, y: Appearance.endPoint)
+                )
+            }
             
             HStack(alignment: .center, spacing: Appearance.padding) {
                 Button {
@@ -55,19 +64,28 @@ struct LandmarkView: View {
             
             VStack(alignment: .leading, spacing: Appearance.padding) {
                 Spacer()
-                
-                LandmarkTitle(text: "Place title")
-                LandmarkDescription(text: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.")
-                LandmarkDescription(text: "Mon - Sat, 9AM - 5PM")
-
-                Spacer()
+                LandmarkTitle(text: model.name ?? "")
+                LandmarkDescription(text: model.descript ?? "")
+                LandmarkDescription(text: model.workhours ?? "")
+                    .italic()
             }
             .padding(.all, Appearance.padding)
         }
         .foregroundStyle(.white)
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
-    LandmarkView()
+    LandmarkView(model: Landmark(
+        category: "landmarks",
+        name: "Acropolis and The Rock",
+        address: nil,
+        lat: 37.9715,
+        long: 23.7257,
+        descript: "The Acropolis of Athens and its monuments are universal symbols of the classical spirit and civilization and form the greatest architectural and artistic complex bequeathed by Greek Antiquity to the world. An exceptional group of artists put into effect the ambitious plans of Athenian statesman Pericles and, under the inspired guidance of the sculptor Pheidias, transformed the rocky hill into a unique monument of thought and the arts.",
+        phone: "+302103214172",
+        workhours: "8 AM - 8 PM",
+        image: "https://github.com/auctoritae/hsource/blob/main/zappeion.jpg?raw=true")
+    )
 }

@@ -29,6 +29,8 @@ final class FeedStore {
     }
     
     func fetchData() {
+        guard state.landmarks.isEmpty else { return }
+        
         Task { @MainActor in
             let result = try await api.fetchData()
             send(action: .start(result.map {

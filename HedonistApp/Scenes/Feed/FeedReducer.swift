@@ -13,7 +13,7 @@ final class FeedReducer {
         
         switch action {
         case let .start(landmarks):
-            newState.landmarks = landmarks
+            newState.landmarks = landmarks.shuffled()
         case let .filter(category):
             newState.filter = []
             newState.filter = state.landmarks.filter { $0.category == category }
