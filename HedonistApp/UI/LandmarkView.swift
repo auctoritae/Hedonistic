@@ -7,15 +7,21 @@
 
 import SwiftUI
 
+protocol LandmarkViewDelegate {
+    func close()
+    func save()
+    func call()
+}
+
 struct LandmarkView: View {
     private enum Appearance {
-        static let startPoint: CGFloat = 0.2
-        static let endPoint: CGFloat = 1.0
+        static let endPoint: CGFloat = 0.85
         static let padding: CGFloat = 20
         static let height: CGFloat = 450
     }
     
     let model: Landmark
+    var delegate: LandmarkViewDelegate?
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -34,31 +40,24 @@ struct LandmarkView: View {
             .overlay {
                 LinearGradient(
                     gradient: Gradient(colors: [.clear, .black]),
-                    startPoint: .init(x: .zero, y: Appearance.startPoint),
+                    startPoint: .init(x: .zero, y: .zero),
                     endPoint: .init(x: .zero, y: Appearance.endPoint)
                 )
             }
             
             HStack(alignment: .center, spacing: Appearance.padding) {
-                Button {
-                    
-                } label: {
-                    Image(systemName: "xmark")
-                }
-                
+                IconButtonView(model: IconButtonModel(icon: "xmark", action: {
+                    delegate?.close()
+                }))
                 Spacer()
                 
-                Button {
-                    
-                } label: {
-                    Image(systemName: "bookmark")
-                }
+                IconButtonView(model: IconButtonModel(icon: "bookmark", action: {
+                    delegate?.save()
+                }))
                 
-                Button {
-                    
-                } label: {
-                    Image(systemName: "phone.arrow.up.right.fill")
-                }
+                IconButtonView(model: IconButtonModel(icon: "iphone.and.arrow.right.inward", action: {
+                    delegate?.call()
+                }))
             }
             .padding(.all, Appearance.padding)
             
@@ -86,6 +85,6 @@ struct LandmarkView: View {
         descript: "The Acropolis of Athens and its monuments are universal symbols of the classical spirit and civilization and form the greatest architectural and artistic complex bequeathed by Greek Antiquity to the world. An exceptional group of artists put into effect the ambitious plans of Athenian statesman Pericles and, under the inspired guidance of the sculptor Pheidias, transformed the rocky hill into a unique monument of thought and the arts.",
         phone: "+302103214172",
         workhours: "8 AM - 8 PM",
-        image: "https://github.com/auctoritae/hsource/blob/main/zappeion.jpg?raw=true")
+        image: "https://i.postimg.cc/MHPyqNFm/tempImageyNo6ZP.avif")
     )
 }

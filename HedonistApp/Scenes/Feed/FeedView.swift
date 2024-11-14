@@ -27,24 +27,36 @@ struct FeedView: View {
                             image: model.image ?? "")
                         )
                         .padding(.horizontal, Appearance.padding)
-                        .matchedTransitionSource(
-                            id: model.id,
-                            in: namespace) { source in
-                                source
-                                    .background(.black)
-                                    .clipShape(RoundedRectangle(cornerRadius: Appearance.radius))
-                            }
+                        .matchedTransitionSource(id: model.id, in: namespace) { source in
+                            source
+                                .background(.black)
+                                .clipShape(RoundedRectangle(cornerRadius: Appearance.radius))
+                        }
                     }
                 }
-                .onAppear {
-                    store.fetchData()
-                }
                 .navigationDestination(for: Landmark.self) { model in
-                    LandmarkView(model: model)
+                    LandmarkView(model: model, delegate: self)
                         .navigationTransition(.zoom(sourceID: model.id, in: namespace))
                 }
             }
+            .onAppear {
+                store.fetchData()
+            }
         }
+    }
+}
+
+extension FeedView: LandmarkViewDelegate {
+    func close() {
+        
+    }
+    
+    func save() {
+        
+    }
+    
+    func call() {
+        
     }
 }
 

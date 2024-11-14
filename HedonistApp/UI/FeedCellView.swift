@@ -44,7 +44,6 @@ struct FeedCellView: View {
             LazyVStack(alignment: .leading, spacing: Appearance.spacing) {
                 CellTitle(text: model.title)
                     .multilineTextAlignment(.leading)
-                CellSubtitle(text: model.subtitle)
             }
             .foregroundStyle(.white)
             .padding(.all, Appearance.padding)
@@ -56,6 +55,6 @@ struct FeedCellView: View {
     FeedCellView(model: FeedCellModel(
         title: "Place title",
         subtitle: "Place subtitle",
-        image: "https://github.com/auctoritae/hsource/blob/main/acropolis.jpg?raw=true")
+        image: "https://i.postimg.cc/MHPyqNFm/tempImageyNo6ZP.avif")
     )
 }

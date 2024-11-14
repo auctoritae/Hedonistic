@@ -20,7 +20,6 @@ struct FontsView: View {
             CellTitle(text: mock)
             FilterTitle(text: mock)
             LandmarkDescription(text: mock)
-            CellSubtitle(text: mock)
         }
         .padding(Appearance.padding)
     }
@@ -48,17 +47,6 @@ struct CellTitle: View {
         Text(text.uppercased())
             .font(.title2)
             .fontWeight(.heavy)
-    }
-}
-
-struct CellSubtitle: View {
-    var text: String
-    
-    var body: some View {
-        Text(text)
-            .font(.subheadline)
-            .foregroundStyle(.gray)
-            .italic()
     }
 }
 
