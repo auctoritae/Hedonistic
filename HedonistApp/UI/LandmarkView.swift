@@ -63,9 +63,9 @@ struct LandmarkView: View {
             
             VStack(alignment: .leading, spacing: Appearance.padding) {
                 Spacer()
-                LandmarkTitle(text: model.name ?? "")
-                LandmarkDescription(text: model.descript ?? "")
-                LandmarkDescription(text: model.workhours ?? "")
+                PrimaryTitle(text: model.name ?? "")
+                CustomDescription(text: model.descript ?? "")
+                CustomDescription(text: model.workhours ?? "")
                     .italic()
             }
             .padding(.all, Appearance.padding)

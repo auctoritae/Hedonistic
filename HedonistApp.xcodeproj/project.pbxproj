@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A0A9DB4A2CE8A4E000EEF106 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = A0A9DB492CE8A4E000EEF106 /* Algorithms */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		A05483A62CD8C45600C7C087 /* HedonistApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HedonistApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0A9DB4A2CE8A4E000EEF106 /* Algorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = HedonistApp;
 			packageProductDependencies = (
+				A0A9DB492CE8A4E000EEF106 /* Algorithms */,
 			);
 			productName = HedonistApp;
 			productReference = A05483A62CD8C45600C7C087 /* HedonistApp.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = A054839D2CD8C45600C7C087;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				A0A9DB482CE8A4E000EEF106 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A05483A72CD8C45600C7C087 /* Products */;
 			projectDirPath = "";
@@ -353,6 +362,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A0A9DB482CE8A4E000EEF106 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A0A9DB492CE8A4E000EEF106 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0A9DB482CE8A4E000EEF106 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A054839E2CD8C45600C7C087 /* Project object */;
 }

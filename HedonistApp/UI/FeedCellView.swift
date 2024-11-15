@@ -12,7 +12,7 @@ struct FeedCellView: View {
         static let spacing: CGFloat = 5
         static let padding: CGFloat = 20
         static let radius: CGFloat = 20
-        static let height: CGFloat = 200
+        static let height: CGFloat = 180
         static let startPoint: CGFloat = 0.1
         static let endPoint: CGFloat = 1.0
         static let opacity: Double = 0.9

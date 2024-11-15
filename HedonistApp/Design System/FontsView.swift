@@ -16,10 +16,10 @@ struct FontsView: View {
     
     var body: some View {
         LazyVStack(alignment: .leading, spacing: Appearance.padding) {
-            LandmarkTitle(text: mock)
+            PrimaryTitle(text: mock)
             CellTitle(text: mock)
             FilterTitle(text: mock)
-            LandmarkDescription(text: mock)
+            CustomDescription(text: mock)
         }
         .padding(Appearance.padding)
     }
@@ -37,6 +37,7 @@ struct FilterTitle: View {
         Text(text)
             .font(.headline)
             .bold()
+            .foregroundStyle(.black)
     }
 }
 
@@ -50,7 +51,7 @@ struct CellTitle: View {
     }
 }
 
-struct LandmarkTitle: View {
+struct PrimaryTitle: View {
     var text: String
     
     var body: some View {
@@ -60,7 +61,7 @@ struct LandmarkTitle: View {
     }
 }
 
-struct LandmarkDescription: View {
+struct CustomDescription: View {
     var text: String
     
     var body: some View {

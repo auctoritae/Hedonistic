@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Algorithms
 
 final class FeedReducer {
     func reduce(state: inout FeedState, action: FeedAction) -> FeedState {
@@ -14,11 +15,13 @@ final class FeedReducer {
         switch action {
         case let .start(landmarks):
             newState.landmarks = landmarks.shuffled()
+            newState.filters = landmarks
+                .map { FilterCellModel(title: $0.category ?? "", selected: false) }
+                .uniqued(on: \.title)
+            
         case let .filter(category):
-            newState.filter = []
-            newState.filter = state.landmarks.filter { $0.category == category }
-        case .clear:
-            newState.filter = []
+            ///
+            return newState
         }
         
         return newState

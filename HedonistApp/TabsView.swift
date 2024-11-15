@@ -12,7 +12,7 @@ struct TabsView: View {
         TabView {
             Tab(content: {
                 FeedView(store: FeedStore(
-                    state: FeedState(landmarks: [], filter: []),
+                    state: FeedState(landmarks: [], filters: [], filtered: []),
                     reducer: FeedReducer(),
                     api: APIManager())
                 )

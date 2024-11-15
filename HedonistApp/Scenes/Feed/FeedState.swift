@@ -9,5 +9,6 @@ import Foundation
 
 struct FeedState {
     var landmarks: [Landmark]
-    var filter: [Landmark]
+    var filters: [FilterCellModel]
+    var filtered: [Landmark]
 }

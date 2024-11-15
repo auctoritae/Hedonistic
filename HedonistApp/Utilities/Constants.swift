@@ -14,14 +14,6 @@ enum SceneTitles {
     static let settings = "Settings"
 }
 
-enum SearchTitles: String, CaseIterable {
-    case all = "all"
-    case breakfasts = "breakfast"
-    case restaraunt = "restaurants"
-    case places = "landmarks"
-    case city = "city"
-}
-
 enum DefaultLocation {
     static let latitude = 37.9668459
     static let longitude = 23.7306856
