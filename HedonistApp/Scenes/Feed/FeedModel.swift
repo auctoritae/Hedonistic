@@ -29,5 +29,5 @@ struct FeedCellModel {
 struct FilterCellModel: Identifiable, Hashable {
     let id: UUID = UUID()
     let title: String
-    let selected: Bool
+    var selected: Bool
 }

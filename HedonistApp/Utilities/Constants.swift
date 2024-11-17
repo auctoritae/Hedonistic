@@ -20,11 +20,18 @@ enum DefaultLocation {
     static let zoom: Double = 1000
 }
 
-enum Errors {
-    static let fetch = "Fetch error.\nPlease try again"
+enum ErrorTitles {
+    static let fetch = "Fetch error"
+    static let database = "Data base error"
+    static let phone = "Call error"
+    static let server = "Server error"
+}
+
+enum ErrorDescription {
+    static let fetch = "Please try again"
     static let database = "Something went wrong - try to bookmark place again"
     static let phone = "No cell number found for this place"
-    static let server = "Server error. Please try again later"
+    static let server = "Please try again later"
 }
 
 enum Alerts {

@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-protocol LandmarkViewDelegate {
-    func close()
-    func save()
-    func call()
-}
-
 struct LandmarkView: View {
     private enum Appearance {
         static let endPoint: CGFloat = 0.85
@@ -20,8 +14,9 @@ struct LandmarkView: View {
         static let height: CGFloat = 450
     }
     
+    @Environment(\.dismiss) private var dismiss
+    @State private var isShowingAlert: Bool = false
     let model: Landmark
-    var delegate: LandmarkViewDelegate?
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -47,17 +42,20 @@ struct LandmarkView: View {
             
             HStack(alignment: .center, spacing: Appearance.padding) {
                 IconButtonView(model: IconButtonModel(icon: "xmark", action: {
-                    delegate?.close()
+                    dismiss()
                 }))
                 Spacer()
                 
                 IconButtonView(model: IconButtonModel(icon: "bookmark", action: {
-                    delegate?.save()
+                    /// swiftData func here
                 }))
                 
                 IconButtonView(model: IconButtonModel(icon: "iphone.and.arrow.right.inward", action: {
-                    delegate?.call()
+                    call(phone: model.phone)
                 }))
+                .alert(ErrorTitles.phone, isPresented: $isShowingAlert) {} message: {
+                    Text(ErrorDescription.phone)
+                }
             }
             .padding(.all, Appearance.padding)
             
@@ -72,6 +70,19 @@ struct LandmarkView: View {
         }
         .foregroundStyle(.white)
         .navigationBarBackButtonHidden()
+    }
+    
+    
+    private func call(phone: String?) {
+        if let number = phone?
+            .components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+            .joined(separator: ""),
+           let url = NSURL(string: ("tel:" + "+" + number)) {
+            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+            
+        } else {
+            isShowingAlert = true
+        }
     }
 }
 

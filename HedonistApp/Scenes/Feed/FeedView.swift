@@ -12,8 +12,8 @@ struct FeedView: View {
         static let padding: CGFloat = 10
         static let radius: CGFloat = 20
         static let spacing: CGFloat = 20
-        static let gridItemHeight: CGFloat = 40
-        static let gridHeight: CGFloat = 60
+        static let gridItemHeight: CGFloat = 35
+        static let gridHeight: CGFloat = 70
     }
     
     @Namespace var namespace
@@ -30,12 +30,14 @@ struct FeedView: View {
                     spacing: Appearance.padding)
                 {
                     ForEach(store.state.filters, id: \.id) { model in
-                        FilterCellView(model: model)
+                        FilterCellView(model: model).onTapGesture {
+                            store.send(action: .filter(model.title))
+                        }
                     }
                 }
                 .padding(.horizontal, Appearance.padding)
             }
-            .frame(width: .infinity, height: Appearance.gridHeight)
+            .frame(height: Appearance.gridHeight)
             .scrollIndicators(.hidden)
             
             ScrollView(.vertical) {
@@ -54,7 +56,7 @@ struct FeedView: View {
                         }
                     }
                     .navigationDestination(for: Landmark.self) { model in
-                        LandmarkView(model: model, delegate: self)
+                        LandmarkView(model: model)
                             .navigationTransition(.zoom(sourceID: model.id, in: namespace))
                     }
                 }
@@ -64,20 +66,6 @@ struct FeedView: View {
                 store.fetchData()
             }
         }
-    }
-}
-
-extension FeedView: LandmarkViewDelegate {
-    func close() {
-        
-    }
-    
-    func save() {
-        
-    }
-    
-    func call() {
-        
     }
 }
 

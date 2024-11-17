@@ -10,10 +10,10 @@ import SwiftUI
 struct FilterCellView: View {
     private enum Appearance {
         static let corners: CGFloat = 20
-        static let height: CGFloat = 40
+        static let height: CGFloat = 35
     }
     
-    @State var model: FilterCellModel
+    let model: FilterCellModel
     
     var body: some View {
         FilterTitle(text: "    # \(model.title)    ")
