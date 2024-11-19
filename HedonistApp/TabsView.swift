@@ -21,7 +21,12 @@ struct TabsView: View {
                 Text(SceneTitles.feed)
             }
             
-            Tab(content: { BookmarksView() }) {
+            Tab(content: {
+                BookmarksView(store: BookmarksStore(
+                    state: BookmarksState(),
+                    reducer: BookmarksReducer())
+                )
+            }) {
                 Image(systemName: "bookmark.fill")
                 Text(SceneTitles.bookmarks)
             }
