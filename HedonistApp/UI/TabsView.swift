@@ -14,7 +14,8 @@ struct TabsView: View {
                 FeedView(store: FeedStore(
                     state: FeedState(landmarks: [], filters: [], filtered: []),
                     reducer: FeedReducer(),
-                    api: APIManager())
+                    api: APIManager(),
+                    db: DBService())
                 )
              }) {
                 Image(systemName: "eye.fill")
@@ -23,8 +24,9 @@ struct TabsView: View {
             
             Tab(content: {
                 BookmarksView(store: BookmarksStore(
-                    state: BookmarksState(),
-                    reducer: BookmarksReducer())
+                    state: BookmarksState(bookmarks: []),
+                    reducer: BookmarksReducer(),
+                    db: DBService())
                 )
             }) {
                 Image(systemName: "bookmark.fill")
@@ -34,11 +36,6 @@ struct TabsView: View {
             Tab(content: { MapsView() }) {
                 Image(systemName: "map.fill")
                 Text(SceneTitles.map)
-            }
-            
-            Tab(content: { SettingsView() }) {
-                Image(systemName: "gear")
-                Text(SceneTitles.settings)
             }
         }
     }

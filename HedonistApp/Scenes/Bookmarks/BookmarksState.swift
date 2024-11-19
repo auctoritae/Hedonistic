@@ -8,5 +8,5 @@
 import Foundation
 
 struct BookmarksState {
-    
+    var bookmarks: [Landmark]
 }

@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+protocol LandmarkViewDelegate {
+    func dbAction(type: FeedDBAction)
+}
+
 struct LandmarkView: View {
     private enum Appearance {
         static let endPoint: CGFloat = 0.85
@@ -17,6 +21,7 @@ struct LandmarkView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var isShowingAlert: Bool = false
     let model: Landmark
+    var delegate: LandmarkViewDelegate?
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -46,8 +51,10 @@ struct LandmarkView: View {
                 }))
                 Spacer()
                 
-                IconButtonView(model: IconButtonModel(icon: "bookmark", action: {
-                    /// swiftData func here
+                IconButtonView(model: IconButtonModel(
+                    icon: model.bookmarked ? "bookmark.fill" : "bookmark",
+                    action: {
+                        model.bookmarked ? delegate?.dbAction(type: .delete(model)) : delegate?.dbAction(type: .save(model))
                 }))
                 
                 IconButtonView(model: IconButtonModel(icon: "iphone.and.arrow.right.inward", action: {
@@ -96,6 +103,7 @@ struct LandmarkView: View {
         descript: "The Acropolis of Athens and its monuments are universal symbols of the classical spirit and civilization and form the greatest architectural and artistic complex bequeathed by Greek Antiquity to the world. An exceptional group of artists put into effect the ambitious plans of Athenian statesman Pericles and, under the inspired guidance of the sculptor Pheidias, transformed the rocky hill into a unique monument of thought and the arts.",
         phone: "+302103214172",
         workhours: "8 AM - 8 PM",
-        image: "https://i.postimg.cc/MHPyqNFm/tempImageyNo6ZP.avif")
+        image: "https://i.postimg.cc/MHPyqNFm/tempImageyNo6ZP.avif",
+        bookmarked: false)
     )
 }

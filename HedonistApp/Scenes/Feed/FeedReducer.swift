@@ -18,10 +18,10 @@ final class FeedReducer {
         case let .start(landmarks):
             newState.landmarks = landmarks.shuffled()
             self.landmarks = newState.landmarks
-            
             newState.filters = landmarks
                 .map { FilterCellModel(title: $0.category ?? "", selected: false) }
                 .uniqued(on: \.title)
+            
             
         case let .filter(category):
             guard var filter = state.filters.first(where: { $0.title == category }) else { return state }
@@ -35,7 +35,17 @@ final class FeedReducer {
             let filtered = landmarks.filter({ $0.category == category })
             newState.landmarks = filter.selected ? filtered : landmarks
             
-            return newState
+            
+        case let .save(landmark):
+            guard let index = landmarks.firstIndex(where: { $0.id == landmark.id }) else { return state }
+            landmarks[index].bookmarked = true
+            newState.landmarks = landmarks
+            
+            
+        case let .delete(landmark):
+            guard let index = landmarks.firstIndex(where: { $0.id == landmark.id }) else { return state }
+            landmarks[index].bookmarked = false
+            newState.landmarks = landmarks
         }
         
         return newState

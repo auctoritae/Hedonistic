@@ -9,7 +9,9 @@ import SwiftUI
 
 struct MapsView: View {
     var body: some View {
-        Text("Map")
+        NavigationStack {
+            PrimaryTitle(text: SceneTitles.map)
+        }
     }
 }
 

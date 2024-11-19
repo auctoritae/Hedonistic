@@ -56,7 +56,7 @@ struct FeedView: View {
                         }
                     }
                     .navigationDestination(for: Landmark.self) { model in
-                        LandmarkView(model: model)
+                        LandmarkView(model: model, delegate: self)
                             .navigationTransition(.zoom(sourceID: model.id, in: namespace))
                     }
                 }
@@ -69,10 +69,24 @@ struct FeedView: View {
     }
 }
 
+
+extension FeedView: LandmarkViewDelegate {
+    func dbAction(type: FeedDBAction) {
+        switch type {
+        case let .save(landmark):
+            store.save(landmark)
+        case let .delete(landmark):
+            store.delete(landmark)
+        }
+    }
+}
+
+
 #Preview {
     FeedView(store: FeedStore(
         state: FeedState(landmarks: [], filters: [], filtered: []),
         reducer: FeedReducer(),
-        api: APIManager())
+        api: APIManager(),
+        db: DBService())
     )
 }

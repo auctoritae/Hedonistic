@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct HedonistApp: App {
@@ -13,5 +14,6 @@ struct HedonistApp: App {
         WindowGroup {
             TabsView()
         }
+        .modelContainer(for: Landmark.self)
     }
 }

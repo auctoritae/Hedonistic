@@ -14,13 +14,21 @@ struct BookmarksView: View {
     var body: some View {
         NavigationStack {
             PrimaryTitle(text: SceneTitles.bookmarks)
+            
+            VStack {
+                
+            }
+            .onAppear {
+                store.fetchData()
+            }
         }
     }
 }
 
 #Preview {
     BookmarksView(store: BookmarksStore(
-        state: BookmarksState(),
-        reducer: BookmarksReducer()
+        state: BookmarksState(bookmarks: []),
+        reducer: BookmarksReducer(),
+        db: DBService()
     ))
 }

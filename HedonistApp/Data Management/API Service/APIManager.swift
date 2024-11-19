@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol APIManagerProtocol {
+protocol APIManagerProtocol: AnyObject {
     func fetchData() async throws -> [APIModel]
 }
 

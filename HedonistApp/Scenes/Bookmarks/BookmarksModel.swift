@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct BookmarkCellModel {
+    let title: String
+    let subtitle: String
+    let image: String
+}

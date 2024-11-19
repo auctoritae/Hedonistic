@@ -11,22 +11,26 @@ import Observation
 final class FeedStore {
     private(set) var state: FeedState
     private let reducer: FeedReducer
-    private let api: APIManager
+    private let api: APIManagerProtocol
+    private let db: DBServiceProtocol
     
     init(
         state: FeedState,
         reducer: FeedReducer,
-        api: APIManager
+        api: APIManagerProtocol,
+        db: DBServiceProtocol
     ) {
         self.state = state
         self.reducer = reducer
         self.api = api
+        self.db = db
     }
     
     
     func send(action: FeedAction) {
         state = reducer.reduce(state: &state, action: action)
     }
+    
     
     func fetchData() {
         guard state.landmarks.isEmpty else { return }
@@ -43,9 +47,22 @@ final class FeedStore {
                     descript: $0.descript,
                     phone: $0.phone,
                     workhours: $0.workhours,
-                    image: $0.image
+                    image: $0.image,
+                    bookmarked: false
                 )
             }))
         }
+    }
+    
+    
+    func save(_ landmark: Landmark) {
+        send(action: .save(landmark))
+        db.save(landmark)
+    }
+    
+    
+    func delete(_ landmark: Landmark) {
+        send(action: .delete(landmark))
+        db.delete(landmark)
     }
 }
