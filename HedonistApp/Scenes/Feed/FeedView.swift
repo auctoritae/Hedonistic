@@ -41,7 +41,7 @@ struct FeedView: View {
             .scrollIndicators(.hidden)
             
             ScrollView(.vertical) {
-                ForEach(store.state.landmarks, id: \.id) { model in
+                ForEach(store.state.filtered, id: \.id) { model in
                     NavigationLink(value: model) {
                         FeedCellView(model: FeedCellModel(
                             title: model.name ?? "",
@@ -84,7 +84,7 @@ extension FeedView: LandmarkViewDelegate {
 
 #Preview {
     FeedView(store: FeedStore(
-        state: FeedState(landmarks: [], filters: [], filtered: []),
+        state: FeedState(landmarks: [], filters: []),
         reducer: FeedReducer(),
         api: APIManager(),
         db: DBService())
