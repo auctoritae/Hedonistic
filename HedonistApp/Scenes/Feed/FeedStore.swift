@@ -12,18 +12,15 @@ final class FeedStore {
     private(set) var state: FeedState
     private let reducer: FeedReducer
     private let api: APIManagerProtocol
-    private let db: DBServiceProtocol
     
     init(
         state: FeedState,
         reducer: FeedReducer,
-        api: APIManagerProtocol,
-        db: DBServiceProtocol
+        api: APIManagerProtocol
     ) {
         self.state = state
         self.reducer = reducer
         self.api = api
-        self.db = db
     }
     
     
@@ -46,20 +43,9 @@ final class FeedStore {
                     descript: $0.descript,
                     phone: $0.phone,
                     workhours: $0.workhours,
-                    image: $0.image,
-                    bookmarked: false
+                    image: $0.image
                 )
             }))
         }
-    }
-    
-    func save(_ landmark: Landmark) {
-        send(action: .save(landmark))
-        db.save(landmark)
-    }
-    
-    func delete(_ landmark: Landmark) {
-        send(action: .delete(landmark))
-        db.delete(landmark)
     }
 }

@@ -14,11 +14,12 @@ struct TabsView: View {
     var body: some View {
         TabView {
             Tab(content: {
-                FeedView(store: FeedStore(
-                    state: FeedState(landmarks: [], filters: []),
-                    reducer: FeedReducer(),
-                    api: APIManager(),
-                    db: DBService(context: context))
+                FeedView(
+                    store: FeedStore(
+                        state: FeedState(landmarks: [], filters: []),
+                        reducer: FeedReducer(),
+                        api: APIManager()),
+                    context: context
                 )
              }) {
                 Image(systemName: "eye.fill")

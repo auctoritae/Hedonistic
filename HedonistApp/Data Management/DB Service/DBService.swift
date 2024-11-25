@@ -21,6 +21,7 @@ final class DBService: DBServiceProtocol {
         self.context = context
     }
     
+    
     func fetch() -> [Landmark] {
         do {
             let fetchDescriptor = FetchDescriptor<Landmark>()
@@ -29,6 +30,7 @@ final class DBService: DBServiceProtocol {
             return []
         }
     }
+    
     
     func save(_ landmark: Landmark) {
         context.insert(landmark)
@@ -39,6 +41,7 @@ final class DBService: DBServiceProtocol {
             debugPrint("DB save error: \(error.localizedDescription)")
         }
     }
+    
     
     func delete(_ landmark: Landmark) {
         context.delete(landmark)

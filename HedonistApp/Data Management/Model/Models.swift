@@ -35,9 +35,8 @@ final class Landmark: Hashable {
     var phone: String?
     var workhours: String?
     var image: String?
-    var bookmarked: Bool
     
-    init(category: String? = nil, name: String? = nil, address: String? = nil, lat: Double? = nil, long: Double? = nil, descript: String? = nil, phone: String? = nil, workhours: String? = nil, image: String? = nil, bookmarked: Bool) {
+    init(category: String? = nil, name: String? = nil, address: String? = nil, lat: Double? = nil, long: Double? = nil, descript: String? = nil, phone: String? = nil, workhours: String? = nil, image: String? = nil) {
         self.category = category
         self.name = name
         self.address = address
@@ -47,7 +46,6 @@ final class Landmark: Hashable {
         self.phone = phone
         self.workhours = workhours
         self.image = image
-        self.bookmarked = bookmarked
     }
 }
 

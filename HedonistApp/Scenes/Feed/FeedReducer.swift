@@ -22,14 +22,6 @@ final class FeedReducer {
             state.filters = state.filters.map { FilterCellModel(title: $0.title, selected: false) }
             state.filters[index].selected.toggle()
             state.type = .filtered(category)
-            
-        case let .save(landmark):
-            guard let index = state.landmarks.firstIndex(where: { $0.id == landmark.id }) else { return state }
-            state.landmarks[index].bookmarked = true
-            
-        case let .delete(landmark):
-            guard let index = state.landmarks.firstIndex(where: { $0.id == landmark.id }) else { return state }
-            state.landmarks[index].bookmarked = false
         }
         
         return state

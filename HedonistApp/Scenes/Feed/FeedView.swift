@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct FeedView: View {
     private enum Appearance {
@@ -18,6 +19,7 @@ struct FeedView: View {
     
     @Namespace var namespace
     var store: FeedStore
+    let context: ModelContext
     
     var body: some View {
         NavigationStack {
@@ -56,7 +58,11 @@ struct FeedView: View {
                         }
                     }
                     .navigationDestination(for: Landmark.self) { model in
-                        LandmarkView(model: model, delegate: self)
+                        LandmarkView(store: LandmarkStore(
+                            state: LandmarkState(landmark: model),
+                            reducer: LandmarkReducer(),
+                            db: DBService(context: context))
+                        )
                             .navigationTransition(.zoom(sourceID: model.id, in: namespace))
                     }
                 }
@@ -65,18 +71,6 @@ struct FeedView: View {
             .onAppear {
                 store.fetchData()
             }
-        }
-    }
-}
-
-
-extension FeedView: LandmarkViewDelegate {
-    func dbAction(type: FeedDBAction) {
-        switch type {
-        case let .save(landmark):
-            store.save(landmark)
-        case let .delete(landmark):
-            store.delete(landmark)
         }
     }
 }
