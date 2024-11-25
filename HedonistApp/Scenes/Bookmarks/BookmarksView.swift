@@ -24,11 +24,3 @@ struct BookmarksView: View {
         }
     }
 }
-
-#Preview {
-    BookmarksView(store: BookmarksStore(
-        state: BookmarksState(bookmarks: []),
-        reducer: BookmarksReducer(),
-        db: DBService()
-    ))
-}

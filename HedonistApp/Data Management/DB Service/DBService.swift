@@ -15,18 +15,38 @@ protocol DBServiceProtocol: AnyObject {
 }
 
 final class DBService: DBServiceProtocol {
-    @Environment(\.modelContext) var context
-    @Query var landmarks: [Landmark]
+    private var context: ModelContext
+    
+    init(context: ModelContext) {
+        self.context = context
+    }
     
     func fetch() -> [Landmark] {
-        return landmarks
+        do {
+            let fetchDescriptor = FetchDescriptor<Landmark>()
+            return try context.fetch(fetchDescriptor)
+        } catch {
+            return []
+        }
     }
     
     func save(_ landmark: Landmark) {
         context.insert(landmark)
+        
+        do {
+            try context.save()
+        } catch {
+            debugPrint("DB save error: \(error.localizedDescription)")
+        }
     }
     
     func delete(_ landmark: Landmark) {
         context.delete(landmark)
+        
+        do {
+            try context.save()
+        } catch {
+            debugPrint("DB delete error: \(error.localizedDescription)")
+        }
     }
 }

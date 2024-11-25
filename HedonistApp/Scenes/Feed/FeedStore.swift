@@ -31,7 +31,6 @@ final class FeedStore {
         state = reducer.reduce(state: &state, action: action)
     }
     
-    
     func fetchData() {
         guard state.landmarks.isEmpty else { return }
         
@@ -54,12 +53,10 @@ final class FeedStore {
         }
     }
     
-    
     func save(_ landmark: Landmark) {
         send(action: .save(landmark))
         db.save(landmark)
     }
-    
     
     func delete(_ landmark: Landmark) {
         send(action: .delete(landmark))

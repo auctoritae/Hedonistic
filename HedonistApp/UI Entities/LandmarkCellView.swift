@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FeedCellView: View {
+struct LandmarkCellView: View {
     private enum Appearance {
         static let spacing: CGFloat = 5
         static let padding: CGFloat = 20
@@ -18,7 +18,7 @@ struct FeedCellView: View {
         static let opacity: Double = 0.9
     }
     
-    let model: FeedCellModel
+    let model: LandmarkCellModel
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -52,7 +52,7 @@ struct FeedCellView: View {
 }
 
 #Preview {
-    FeedCellView(model: FeedCellModel(
+    LandmarkCellView(model: LandmarkCellModel(
         title: "Place title",
         subtitle: "Place subtitle",
         image: "https://i.postimg.cc/MHPyqNFm/tempImageyNo6ZP.avif")

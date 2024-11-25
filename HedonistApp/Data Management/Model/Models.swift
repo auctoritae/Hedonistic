@@ -50,3 +50,9 @@ final class Landmark: Hashable {
         self.bookmarked = bookmarked
     }
 }
+
+struct LandmarkCellModel {
+    let title: String
+    let subtitle: String
+    let image: String
+}

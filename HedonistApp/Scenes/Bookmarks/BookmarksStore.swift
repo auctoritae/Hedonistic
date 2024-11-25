@@ -32,4 +32,9 @@ final class BookmarksStore {
         let bookmarks = db.fetch()
         send(action: .start(bookmarks))
     }
+    
+    func delete(_ landmark: Landmark) {
+        send(action: .delete(landmark))
+        db.delete(landmark)
+    }
 }

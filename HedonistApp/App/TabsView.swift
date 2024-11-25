@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct TabsView: View {
+    @Environment(\.modelContext) var context
+    
     var body: some View {
         TabView {
             Tab(content: {
@@ -15,7 +18,7 @@ struct TabsView: View {
                     state: FeedState(landmarks: [], filters: []),
                     reducer: FeedReducer(),
                     api: APIManager(),
-                    db: DBService())
+                    db: DBService(context: context))
                 )
              }) {
                 Image(systemName: "eye.fill")
@@ -26,7 +29,7 @@ struct TabsView: View {
                 BookmarksView(store: BookmarksStore(
                     state: BookmarksState(bookmarks: []),
                     reducer: BookmarksReducer(),
-                    db: DBService())
+                    db: DBService(context: context))
                 )
             }) {
                 Image(systemName: "bookmark.fill")

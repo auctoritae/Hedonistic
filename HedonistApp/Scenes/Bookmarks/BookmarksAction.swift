@@ -8,6 +8,6 @@
 import Foundation
 
 enum BookmarksAction {
-    case start([Landmark])
-    case delete
+    case start(_ landmarks: [Landmark])
+    case delete(_ Landmark: Landmark)
 }

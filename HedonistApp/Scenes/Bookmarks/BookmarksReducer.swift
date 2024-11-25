@@ -6,23 +6,17 @@
 //
 
 import Foundation
-import Algorithms
 
 final class BookmarksReducer {
-    private var bookmarks: [Landmark] = []
-    
     func reduce(state: inout BookmarksState, action: BookmarksAction) -> BookmarksState {
-        var newState = state
-       
         switch action {
         case let .start(bookmarks):
-            self.bookmarks = bookmarks
-            newState.bookmarks = bookmarks
-            
-        case .delete:
-            break
+            state.bookmarks = bookmarks
+        case let .delete(bookmark):
+            guard let index = state.bookmarks.firstIndex(where: { $0.id == bookmark.id }) else { return state }
+            state.bookmarks.remove(at: index)
         }
         
-        return newState
+        return state
     }
 }
