@@ -38,7 +38,7 @@ final class DBService: DBServiceProtocol {
         do {
             try context.save()
         } catch {
-            debugPrint("DB save error: \(error.localizedDescription)")
+            context.rollback()
         }
     }
     
@@ -49,7 +49,7 @@ final class DBService: DBServiceProtocol {
         do {
             try context.save()
         } catch {
-            debugPrint("DB delete error: \(error.localizedDescription)")
+            context.rollback()
         }
     }
 }

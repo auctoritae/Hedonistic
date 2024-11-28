@@ -30,7 +30,7 @@ struct TabsView: View {
                 BookmarksView(store: BookmarksStore(
                     state: BookmarksState(bookmarks: []),
                     reducer: BookmarksReducer(),
-                    db: DBService(context: context))
+                    db: DBService(context: context)), context: context
                 )
             }) {
                 Image(systemName: "bookmark.fill")
