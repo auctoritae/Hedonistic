@@ -37,7 +37,13 @@ struct TabsView: View {
                 Text(SceneTitles.bookmarks)
             }
             
-            Tab(content: { MapsView() }) {
+            Tab(content: {
+                MapsView(store: MapsStore(
+                    state: MapsState(landmarks: []),
+                    reducer: MapsReducer(),
+                    api: APIManager()
+                ))
+            }) {
                 Image(systemName: "map.fill")
                 Text(SceneTitles.map)
             }
