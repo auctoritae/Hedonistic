@@ -10,5 +10,6 @@ import Foundation
 struct MapsModel: Identifiable, Hashable {
     let id: UUID = UUID()
     let title: String
-    let category: String
+    let lat: Double
+    let long: Double
 }

@@ -8,5 +8,5 @@
 import Foundation
 
 enum MapsActions {
-    case start(_ landmarks: [Landmark])
+    case start(_ landmarks: [MapsModel])
 }

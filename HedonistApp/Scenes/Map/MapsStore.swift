@@ -32,17 +32,11 @@ final class MapsStore {
         
         Task { @MainActor in
             let result = try await api.fetchData()
-            send(action: .start(result.map {
-                Landmark(
-                    category: $0.category,
-                    name: $0.name,
-                    address: $0.address,
-                    lat: $0.lat,
-                    long: $0.long,
-                    descript: $0.descript,
-                    phone: $0.phone,
-                    workhours: $0.workhours,
-                    image: $0.image
+            send(action: .start(result.compactMap {
+                MapsModel(
+                    title: $0.name ?? "",
+                    lat: $0.lat ?? 0.0,
+                    long: $0.long ?? 0.0
                 )
             }))
         }

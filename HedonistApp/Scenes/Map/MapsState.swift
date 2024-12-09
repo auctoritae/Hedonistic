@@ -8,5 +8,5 @@
 import Foundation
 
 struct MapsState {
-    var landmarks: [Landmark]
+    var landmarks: [MapsModel]
 }

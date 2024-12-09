@@ -9,11 +9,20 @@ import SwiftUI
 import MapKit
 
 struct MapsView: View {
+    
     var store: MapsStore
     
     var body: some View {
-        NavigationStack {
-            PrimaryTitle(text: SceneTitles.map)
+        Map {
+            ForEach(store.state.landmarks, id: \.id) { landmark in
+                Marker(landmark.title, coordinate: CLLocationCoordinate2D(
+                    latitude: landmark.lat,
+                    longitude: landmark.long)
+                )
+            }
+        }
+        .onAppear {
+            store.fetchData()
         }
     }
 }
