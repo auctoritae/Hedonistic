@@ -58,6 +58,7 @@ struct PrimaryTitle: View {
         Text(text.uppercased())
             .font(.largeTitle)
             .fontWeight(.black)
+            .multilineTextAlignment(.leading)
     }
 }
 

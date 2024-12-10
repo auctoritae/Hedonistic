@@ -50,11 +50,3 @@ struct LandmarkCellView: View {
         }
     }
 }
-
-#Preview {
-    LandmarkCellView(model: LandmarkCellModel(
-        title: "Place title",
-        subtitle: "Place subtitle",
-        image: "https://i.postimg.cc/MHPyqNFm/tempImageyNo6ZP.avif")
-    )
-}

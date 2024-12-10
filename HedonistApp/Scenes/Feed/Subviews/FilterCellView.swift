@@ -24,10 +24,3 @@ struct FilterCellView: View {
             }
     }
 }
-
-#Preview {
-    FilterCellView(model: FilterCellModel(
-        title: "landmarks",
-        selected: true
-    ))
-}

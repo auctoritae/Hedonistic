@@ -34,7 +34,7 @@ final class BookmarksStore {
     }
     
     func delete(_ landmark: Landmark) {
-        send(action: .delete(landmark))
         db.delete(landmark)
+        send(action: .delete(landmark))
     }
 }

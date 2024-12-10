@@ -1,8 +1,8 @@
 //
-//  Credentials.swift
+//  Credits.swift
 //  HedonistApp
 //
-//  Created by Private on 11/7/24.
+//  Created by Private on 12/11/24.
 //
 
 import Foundation
