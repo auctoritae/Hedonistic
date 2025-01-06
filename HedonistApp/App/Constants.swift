@@ -37,5 +37,6 @@ enum Alerts {
 }
 
 enum EmptyState {
-    static let bookmarks = "You have no bookmarks yet.\nTake a look what we have in the Feed"
+    static let bookmarksTitle = "You have no bookmarks yet"
+    static let bookmarksDescription = "Take a look what we have in the Feed"
 }

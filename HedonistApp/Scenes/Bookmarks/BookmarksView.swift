@@ -23,27 +23,37 @@ struct BookmarksView: View {
             PrimaryTitle(text: SceneTitles.bookmarks)
             
             ScrollView(.vertical) {
-                ForEach(store.state.bookmarks, id: \.id) { model in
-                    NavigationLink(value: model) {
-                        LandmarkCellView(model: LandmarkCellModel(
-                            title: model.name ?? "",
-                            subtitle: model.category ?? "",
-                            image: model.image ?? "")
-                        )
-                        .padding(.horizontal, Appearance.padding)
-                        .matchedTransitionSource(id: model.id, in: namespace) { source in
-                            source
-                                .background(.black)
-                                .clipShape(RoundedRectangle(cornerRadius: Appearance.radius))
+                if store.state.bookmarks.count == 0 {
+                    ContentUnavailableView(
+                        EmptyState.bookmarksTitle,
+                        systemImage: "magnifyingglass",
+                        description: Text(EmptyState.bookmarksDescription)
+                    )
+                    .containerRelativeFrame(.vertical)
+                    
+                } else {
+                    ForEach(store.state.bookmarks, id: \.id) { model in
+                        NavigationLink(value: model) {
+                            LandmarkCellView(model: LandmarkCellModel(
+                                title: model.name ?? "",
+                                subtitle: model.category ?? "",
+                                image: model.image ?? "")
+                            )
+                            .padding(.horizontal, Appearance.padding)
+                            .matchedTransitionSource(id: model.id, in: namespace) { source in
+                                source
+                                    .background(.black)
+                                    .clipShape(RoundedRectangle(cornerRadius: Appearance.radius))
+                            }
                         }
-                    }
-                    .navigationDestination(for: Landmark.self) { model in
-                        LandmarkView(store: LandmarkStore(
-                            state: LandmarkState(landmark: model),
-                            reducer: LandmarkReducer(),
-                            db: DBService(context: context))
-                        )
+                        .navigationDestination(for: Landmark.self) { model in
+                            LandmarkView(store: LandmarkStore(
+                                state: LandmarkState(landmark: model),
+                                reducer: LandmarkReducer(),
+                                db: DBService(context: context))
+                            )
                             .navigationTransition(.zoom(sourceID: model.id, in: namespace))
+                        }
                     }
                 }
             }
