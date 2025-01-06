@@ -6,12 +6,15 @@
 //
 
 import Observation
+import MapKit
+import CoreLocation
 
 @Observable
-final class MapsStore {
+final class MapsStore: NSObject, CLLocationManagerDelegate {
     private(set) var state: MapsState
     private let reducer: MapsReducer
     private let api: APIManagerProtocol
+    private var locationManager: CLLocationManager?
     
     init(
         state: MapsState,
@@ -29,6 +32,8 @@ final class MapsStore {
     
     func fetchData() {
         guard state.landmarks.isEmpty else { return }
+        locationManager = CLLocationManager()
+        locationManager?.delegate = self
         
         Task { @MainActor in
             let result = try await api.fetchData()
@@ -40,5 +45,26 @@ final class MapsStore {
                 )
             }))
         }
+    }
+    
+    
+    private func checkLocationAuthorization() {
+        guard let locationManager = locationManager else { return }
+        
+        switch locationManager.authorizationStatus {
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            /// TODO alert
+            break
+        case .authorizedWhenInUse, .authorizedAlways:
+            break
+        @unknown default:
+            break
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkLocationAuthorization()
     }
 }

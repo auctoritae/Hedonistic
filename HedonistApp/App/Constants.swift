@@ -16,7 +16,6 @@ enum SceneTitles {
 enum DefaultLocation {
     static let latitude = 37.9668459
     static let longitude = 23.7306856
-    static let zoom: Double = 1000
 }
 
 enum ErrorTitles {

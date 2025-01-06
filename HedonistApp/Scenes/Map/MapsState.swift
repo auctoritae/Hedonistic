@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 struct MapsState {
     var landmarks: [MapsModel]
