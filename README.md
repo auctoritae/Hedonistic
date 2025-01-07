@@ -20,4 +20,3 @@ Discovery one of the most famous places in the world - Athens, the true gem of t
 - Redux
 - SwiftData
 - MapKit
-- SPM
