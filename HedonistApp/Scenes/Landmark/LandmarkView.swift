@@ -15,7 +15,8 @@ struct LandmarkView: View {
     }
     
     @Environment(\.dismiss) private var dismiss
-    @State private var isShowingAlert: Bool = false
+    @State private var phoneErrorAlert: Bool = false
+    @State private var dbErrorAlert: Bool = false
     var store: LandmarkStore
     
     var body: some View {
@@ -49,14 +50,20 @@ struct LandmarkView: View {
                 IconButtonView(model: IconButtonModel(
                     icon: store.state.bookmarked ?? false ? "bookmark.fill" : "bookmark",
                     action: {
-                        guard let _ = store.state.bookmarked else { return }
+                        guard let _ = store.state.bookmarked else {
+                            dbErrorAlert = true
+                            return
+                        }
                         store.dbAction()
                 }))
+                .alert(ErrorTitles.database, isPresented: $dbErrorAlert) {} message: {
+                    Text(ErrorDescription.database)
+                }
                 
                 IconButtonView(model: IconButtonModel(icon: "iphone.and.arrow.right.inward", action: {
                     call(phone: store.state.landmark.phone)
                 }))
-                .alert(ErrorTitles.phone, isPresented: $isShowingAlert) {} message: {
+                .alert(ErrorTitles.phone, isPresented: $phoneErrorAlert) {} message: {
                     Text(ErrorDescription.phone)
                 }
             }
@@ -85,9 +92,8 @@ struct LandmarkView: View {
             .joined(separator: ""),
            let url = NSURL(string: ("tel:" + "+" + number)) {
             UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
-            
         } else {
-            isShowingAlert = true
+            phoneErrorAlert = true
         }
     }
 }

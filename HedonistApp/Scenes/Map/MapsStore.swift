@@ -54,10 +54,7 @@ final class MapsStore: NSObject, CLLocationManagerDelegate {
         switch locationManager.authorizationStatus {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-        case .restricted, .denied:
-            /// TODO alert
-            break
-        case .authorizedWhenInUse, .authorizedAlways:
+        case .restricted, .denied, .authorizedWhenInUse, .authorizedAlways:
             break
         @unknown default:
             break

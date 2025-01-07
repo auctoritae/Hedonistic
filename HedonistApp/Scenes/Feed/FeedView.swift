@@ -23,8 +23,6 @@ struct FeedView: View {
     
     var body: some View {
         NavigationStack {
-            PrimaryTitle(text: SceneTitles.feed)
-            
             ScrollView(.horizontal) {
                 LazyHGrid(
                     rows: [GridItem(.fixed(Appearance.gridItemHeight))],
@@ -71,6 +69,7 @@ struct FeedView: View {
             .onAppear {
                 store.fetchData()
             }
+            .navigationTitle(Text(SceneTitles.feed.uppercased()))
         }
     }
 }

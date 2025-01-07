@@ -20,8 +20,6 @@ struct BookmarksView: View {
     
     var body: some View {
         NavigationStack {
-            PrimaryTitle(text: SceneTitles.bookmarks)
-            
             ScrollView(.vertical) {
                 if store.state.bookmarks.count == 0 {
                     ContentUnavailableView(
@@ -61,6 +59,7 @@ struct BookmarksView: View {
             .onAppear {
                 store.fetchData()
             }
+            .navigationTitle(Text(SceneTitles.bookmarks.uppercased()))
         }
     }
 }

@@ -22,17 +22,14 @@ enum ErrorTitles {
     static let fetch = "Fetch error"
     static let database = "Data base error"
     static let phone = "Call error"
+    static let map = "Looks like that location is off or disallowed."
 }
 
 enum ErrorDescription {
     static let fetch = "Please try again"
     static let database = "Something went wrong - try to bookmark place again"
     static let phone = "No cell number found for this place"
-}
-
-enum Alerts {
-    static let bookmarkAdded = "Added to bookmarks"
-    static let locationServices = "Looks like that location is off or disallowed. You can change it in the your device settings."
+    static let map = "You can change it in the your device settings."
 }
 
 enum EmptyState {
