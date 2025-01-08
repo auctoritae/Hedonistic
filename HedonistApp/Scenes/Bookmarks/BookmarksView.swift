@@ -12,6 +12,7 @@ struct BookmarksView: View {
     private enum Appearance {
         static let padding: CGFloat = 10
         static let radius: CGFloat = 20
+        static let cellHeight: CGFloat = 140
     }
     
     @Namespace var namespace
@@ -32,7 +33,7 @@ struct BookmarksView: View {
                 } else {
                     ForEach(store.state.bookmarks, id: \.id) { model in
                         NavigationLink(value: model) {
-                            LandmarkCellView(model: LandmarkCellModel(
+                            LandmarkCellView(height: Appearance.cellHeight, model: LandmarkCellModel(
                                 title: model.name ?? "",
                                 subtitle: model.category ?? "",
                                 image: model.image ?? "")
