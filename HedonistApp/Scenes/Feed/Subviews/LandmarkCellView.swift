@@ -12,12 +12,12 @@ struct LandmarkCellView: View {
         static let spacing: CGFloat = 5
         static let padding: CGFloat = 20
         static let radius: CGFloat = 20
-        static let height: CGFloat = 180
         static let startPoint: CGFloat = 0.1
         static let endPoint: CGFloat = 1.0
         static let opacity: Double = 0.9
     }
     
+    let height: CGFloat
     let model: LandmarkCellModel
     
     var body: some View {
@@ -25,13 +25,13 @@ struct LandmarkCellView: View {
             AsyncImage(url: URL(string: model.image)) { image in
                 image
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .scaledToFill()
             } placeholder: {
                 Image("Placeholder")
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .scaledToFill()
             }
-            .frame(height: Appearance.height)
+            .frame(height: height)
             .cornerRadius(Appearance.radius)
             .overlay {
                 LinearGradient(

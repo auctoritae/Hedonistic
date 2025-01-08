@@ -15,6 +15,7 @@ struct FeedView: View {
         static let spacing: CGFloat = 20
         static let gridItemHeight: CGFloat = 35
         static let gridHeight: CGFloat = 70
+        static let cellHeight: CGFloat = 180
     }
     
     @Namespace var namespace
@@ -43,7 +44,7 @@ struct FeedView: View {
             ScrollView(.vertical) {
                 ForEach(store.state.filtered, id: \.id) { model in
                     NavigationLink(value: model) {
-                        LandmarkCellView(model: LandmarkCellModel(
+                        LandmarkCellView(height: Appearance.cellHeight, model: LandmarkCellModel(
                             title: model.name ?? "",
                             subtitle: model.category ?? "",
                             image: model.image ?? "")
