@@ -14,9 +14,9 @@ struct ButtonsView: View {
     
     var body: some View {
         LazyVStack(spacing: Appearance.padding) {
-            IconButtonView(model: IconButtonModel(icon: "xmark", action: {}))
-            IconButtonView(model: IconButtonModel(icon: "bookmark", action: {}))
-            IconButtonView(model: IconButtonModel(icon: "iphone.and.arrow.right.inward", action: {}))
+            IconButtonView(model: IconButtonModel(icon: Icons.xmark, action: {}))
+            IconButtonView(model: IconButtonModel(icon: Icons.bookmark, action: {}))
+            IconButtonView(model: IconButtonModel(icon: Icons.call, action: {}))
         }
     }
 }

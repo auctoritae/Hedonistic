@@ -25,8 +25,8 @@ struct MapsView: View {
                 )
             }
         }
-        .onAppear {
-            store.fetchData()
+        .task {
+            await store.fetchData()
         }
     }
 }

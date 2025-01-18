@@ -13,6 +13,16 @@ enum SceneTitles {
     static let map = "Map"
 }
 
+enum Icons {
+    static let eye = "eye.fill"
+    static let bookmark = "bookmark.fill"
+    static let map = "map.fill"
+    static let xmark = "xmark"
+    static let save = "bookmark"
+    static let call = "iphone.and.arrow.right.inward"
+    static let magnifyingGlass = "magnifyingglass"
+}
+
 enum DefaultLocation {
     static let latitude = 37.9668459
     static let longitude = 23.7306856

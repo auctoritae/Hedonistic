@@ -25,7 +25,7 @@ struct BookmarksView: View {
                 if store.state.bookmarks.count == 0 {
                     ContentUnavailableView(
                         EmptyState.bookmarksTitle,
-                        systemImage: "magnifyingglass",
+                        systemImage: Icons.magnifyingGlass,
                         description: Text(EmptyState.bookmarksDescription)
                     )
                     .containerRelativeFrame(.vertical)

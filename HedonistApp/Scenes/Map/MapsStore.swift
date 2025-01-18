@@ -9,6 +9,7 @@ import Observation
 import MapKit
 import CoreLocation
 
+@MainActor
 @Observable
 final class MapsStore: NSObject, CLLocationManagerDelegate {
     private(set) var state: MapsState
@@ -30,21 +31,19 @@ final class MapsStore: NSObject, CLLocationManagerDelegate {
         state = reducer.reduce(state: &state, action: action)
     }
     
-    func fetchData() {
+    func fetchData() async {
         guard state.landmarks.isEmpty else { return }
         locationManager = CLLocationManager()
         locationManager?.delegate = self
         
-        Task { @MainActor in
-            let result = try await api.fetchData()
-            send(action: .start(result.compactMap {
-                MapsModel(
-                    title: $0.name ?? "",
-                    lat: $0.lat ?? 0.0,
-                    long: $0.long ?? 0.0
-                )
-            }))
-        }
+        let result = await api.fetchData()
+        send(action: .start(result.compactMap {
+            MapsModel(
+                title: $0.name ?? "",
+                lat: $0.lat ?? 0.0,
+                long: $0.long ?? 0.0
+            )
+        }))
     }
     
     

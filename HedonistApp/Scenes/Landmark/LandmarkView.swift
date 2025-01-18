@@ -42,13 +42,13 @@ struct LandmarkView: View {
             }
             
             HStack(alignment: .center, spacing: Appearance.padding) {
-                IconButtonView(model: IconButtonModel(icon: "xmark", action: {
+                IconButtonView(model: IconButtonModel(icon: Icons.xmark, action: {
                     dismiss()
                 }))
                 Spacer()
                 
                 IconButtonView(model: IconButtonModel(
-                    icon: store.state.bookmarked ?? false ? "bookmark.fill" : "bookmark",
+                    icon: store.state.bookmarked ?? false ? Icons.bookmark : Icons.save,
                     action: {
                         guard let _ = store.state.bookmarked else {
                             dbErrorAlert = true
@@ -60,7 +60,7 @@ struct LandmarkView: View {
                     Text(ErrorDescription.database)
                 }
                 
-                IconButtonView(model: IconButtonModel(icon: "iphone.and.arrow.right.inward", action: {
+                IconButtonView(model: IconButtonModel(icon: Icons.call, action: {
                     call(phone: store.state.landmark.phone)
                 }))
                 .alert(ErrorTitles.phone, isPresented: $phoneErrorAlert) {} message: {

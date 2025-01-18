@@ -67,8 +67,8 @@ struct FeedView: View {
                 }
             }
             .scrollIndicators(.hidden)
-            .onAppear {
-                store.fetchData()
+            .task {
+                await store.fetchData()
             }
             .navigationTitle(Text(SceneTitles.feed.uppercased()))
         }

@@ -21,8 +21,8 @@ struct TabsView: View {
                         api: APIManager()),
                     context: context
                 )
-             }) {
-                Image(systemName: "eye.fill")
+            }) {
+                Image(systemName: Icons.eye)
                 Text(SceneTitles.feed)
             }
             
@@ -33,7 +33,7 @@ struct TabsView: View {
                     db: DBService(context: context)), context: context
                 )
             }) {
-                Image(systemName: "bookmark.fill")
+                Image(systemName: Icons.bookmark)
                 Text(SceneTitles.bookmarks)
             }
             
@@ -44,7 +44,7 @@ struct TabsView: View {
                     api: APIManager()
                 ))
             }) {
-                Image(systemName: "map.fill")
+                Image(systemName: Icons.map)
                 Text(SceneTitles.map)
             }
         }

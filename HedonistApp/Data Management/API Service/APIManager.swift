@@ -7,21 +7,26 @@
 
 import Foundation
 
-protocol APIManagerProtocol: AnyObject {
-    func fetchData() async throws -> [APIModel]
+protocol APIManagerProtocol {
+    func fetchData() async -> [APIModel]
 }
 
-final class APIManager: APIManagerProtocol {
-    func fetchData() async throws -> [APIModel] {
+struct APIManager: APIManagerProtocol {
+    func fetchData() async -> [APIModel] {
         guard let url = URL(string: APICredentials.url) else { return [] }
-        
+       
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue(APICredentials.apiKey, forHTTPHeaderField: APICredentials.masterHeader)
         
-        let (data, _) = try await URLSession.shared.data(for: request)
-        let landmarks = try JSONDecoder().decode(APIRecord.self, from: data)
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            let landmarks = try JSONDecoder().decode(APIRecord.self, from: data)
+            return landmarks.record
+        } catch {
+            debugPrint(error.localizedDescription)
+        }
         
-        return landmarks.record
+        return []
     }
 }
