@@ -27,7 +27,7 @@ final class MapsStore: NSObject, CLLocationManagerDelegate {
         self.api = api
     }
     
-    func send(action: MapsActions) {
+    private func send(action: MapsActions) {
         state = reducer.reduce(state: &state, action: action)
     }
     

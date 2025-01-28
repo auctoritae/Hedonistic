@@ -27,10 +27,12 @@ struct TabsView: View {
             }
             
             Tab(content: {
-                BookmarksView(store: BookmarksStore(
-                    state: BookmarksState(bookmarks: []),
-                    reducer: BookmarksReducer(),
-                    db: DBService(context: context)), context: context
+                BookmarksView(
+                    store: BookmarksStore(
+                        state: BookmarksState(bookmarks: []),
+                        reducer: BookmarksReducer(),
+                        db: DBService(context: context)),
+                    context: context
                 )
             }) {
                 Image(systemName: Icons.bookmark)
@@ -38,11 +40,13 @@ struct TabsView: View {
             }
             
             Tab(content: {
-                MapsView(store: MapsStore(
-                    state: MapsState(landmarks: []),
-                    reducer: MapsReducer(),
-                    api: APIManager()
-                ))
+                MapsView(
+                    store: MapsStore(
+                        state: MapsState(landmarks: []),
+                        reducer: MapsReducer(),
+                        api: APIManager()
+                    )
+                )
             }) {
                 Image(systemName: Icons.map)
                 Text(SceneTitles.map)

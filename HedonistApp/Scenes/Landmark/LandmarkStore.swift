@@ -7,6 +7,7 @@
 
 import Observation
 
+@MainActor
 @Observable
 final class LandmarkStore {
     private(set) var state: LandmarkState
@@ -24,7 +25,7 @@ final class LandmarkStore {
     }
     
     
-    func send(action: LandmarkAction) {
+    private func send(action: LandmarkAction) {
         state = reducer.reduce(state: &state, action: action)
     }
     

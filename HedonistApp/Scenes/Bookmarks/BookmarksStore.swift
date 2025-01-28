@@ -7,6 +7,7 @@
 
 import Observation
 
+@MainActor
 @Observable
 final class BookmarksStore {
     private(set) var state: BookmarksState
@@ -24,7 +25,7 @@ final class BookmarksStore {
     }
     
     
-    func send(action: BookmarksAction) {
+    private func send(action: BookmarksAction) {
         state = reducer.reduce(state: &state, action: action)
     }
     
