@@ -31,8 +31,8 @@ final class FeedStore {
     
     func fetchData() async {
         guard state.landmarks.isEmpty else { return }
-        
         let result = await api.fetchData()
+        
         send(action: .start(result.map {
             Landmark(
                 category: $0.category,

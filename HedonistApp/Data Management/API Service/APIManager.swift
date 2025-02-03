@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 protocol APIManagerProtocol {
     func fetchData() async -> [APIModel]
 }
