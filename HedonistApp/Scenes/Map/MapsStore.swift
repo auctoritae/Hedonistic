@@ -6,6 +6,7 @@
 //
 
 import Observation
+import MapKit
 
 @MainActor
 @Observable
@@ -13,6 +14,7 @@ final class MapsStore {
     private(set) var state: MapsState
     private let reducer: MapsReducer
     private let api: APIManagerProtocol
+    private let locationManager = CLLocationManager()
     
     init(
         state: MapsState,
@@ -40,5 +42,9 @@ final class MapsStore {
                 long: $0.long ?? 0.0
             )
         }))
+    }
+    
+    func checkPermissions() async {
+        locationManager.requestWhenInUseAuthorization()
     }
 }

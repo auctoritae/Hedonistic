@@ -7,26 +7,43 @@
 
 import SwiftUI
 import MapKit
-import CoreLocation
 
 struct MapsView: View {
-    var store: MapsStore
+    private enum Appearance {
+        static let annotationSize: CGFloat = 25
+        static let annotationPadding: CGFloat = 8
+    }
     
+    var store: MapsStore
+
     var body: some View {
-        Map(initialPosition: .region(
-            MKCoordinateRegion(
-                center: CLLocationCoordinate2DMake(DefaultLocation.latitude, DefaultLocation.longitude),
-                span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)))
-        ) {
+        Map() {
             ForEach(store.state.landmarks, id: \.id) { landmark in
-                Marker(landmark.title, coordinate: CLLocationCoordinate2D(
+                Annotation(landmark.title,
+                    coordinate: CLLocationCoordinate2D(
                     latitude: landmark.lat,
-                    longitude: landmark.long)
-                )
+                    longitude: landmark.long),
+                    anchor: .center
+                ) {
+                    Image(systemName: Icons.eye)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundStyle(.yellow)
+                        .frame(width: Appearance.annotationSize, height: Appearance.annotationSize)
+                        .padding(Appearance.annotationPadding)
+                        .background(.black, in: .circle)
+                }
             }
         }
         .task {
             await store.fetchData()
+            await store.checkPermissions()
+        }
+        .mapControls {
+            MapUserLocationButton()
+            MapCompass()
+            MapPitchToggle()
+            MapScaleView()
         }
     }
 }
